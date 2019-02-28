@@ -14,5 +14,8 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-serve": "^2.0.3"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
   }
 }
