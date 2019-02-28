@@ -53,27 +53,33 @@ export default class Drawer {
   public drawTime() {
     this.saveContext(ctx => {
       // this.path(ctx => {
-        ctx.strokeStyle = "red";
-        ctx.lineWidth = 1;
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 1;
 
-        let startX = this.timeline.timeConverter.secondsToCoords(
-          this.timeline.offset.value
-        );
-        let endX = startX + this.timeline.width;
+      let startX = this.timeline.timeConverter.secondsToCoords(
+        this.timeline.offset.value
+      );
 
-        for (let x = startX; x < endX; x += this.timeline.secondSize) {
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, 20);
-          ctx.moveTo(0, 0);
-
-          this.saveContext(ctx => {
-            ctx.fillStyle = "white";
-            ctx.textAlign = "center";
-            ctx.fillText(Time.format(x), x, 40);
-          });
+      for (let x = 0; x < this.timeline.width; x++) {
+        if (x % this.timeline.secondSize !== 0) {
+          continue;
         }
 
-        ctx.stroke();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 20);
+        ctx.moveTo(0, 0);
+
+        this.saveContext(ctx => {
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          let xx = this.timeline.timeConverter.secondsToCoords(
+            this.timeline.offset.value
+          );
+          ctx.fillText(Time.format(xx - x), x, 40);
+        });
+      }
+
+      ctx.stroke();
       // });
     });
   }
@@ -103,21 +109,21 @@ export default class Drawer {
   public drawHoveredTime() {
     this.saveContext(ctx => {
       // this.path(ctx => {
-        ctx.strokeStyle = "green";
-        ctx.lineWidth = 0.5;
-        let startX = this.timeline.timeConverter.secondsToCoords(
-          this.timeline.offset.value
-        );
+      ctx.strokeStyle = "green";
+      ctx.lineWidth = 0.5;
+      let startX = this.timeline.timeConverter.secondsToCoords(
+        this.timeline.offset.value
+      );
 
-        ctx.moveTo(
-          startX + this.timeline.secondSize * this.timeline.hoveredTime.value,
-          0
-        );
-        ctx.lineTo(
-          startX + this.timeline.secondSize * this.timeline.hoveredTime.value,
-          this.timeline.height
-        );
-        ctx.moveTo(0, 0);
+      ctx.moveTo(
+        startX + this.timeline.secondSize * this.timeline.hoveredTime.value,
+        0
+      );
+      ctx.lineTo(
+        startX + this.timeline.secondSize * this.timeline.hoveredTime.value,
+        this.timeline.height
+      );
+      ctx.moveTo(0, 0);
       // });
     });
   }

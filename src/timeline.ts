@@ -1,13 +1,8 @@
-import Drawer from "./draw";
 import Time from "./time";
-import TimeConverter from "./time-converter";
 import TimelineEvents from "./events/TimelineEvents";
-
-export interface CanvasDimensions {
-  width?: number;
-  height?: number;
-  canvas?: HTMLCanvasElement;
-}
+import Drawer from "./Drawer";
+import CanvasDimensions from "./CanvasDimensions";
+import TimeConverter from "./TimeConverter";
 
 export default class Timeline {
   public offset: Time = new Time(0);
