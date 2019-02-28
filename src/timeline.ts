@@ -1,7 +1,7 @@
 import Drawer from "./draw";
-import TimelineEvents from "./events";
-import { Time } from "./time";
+import Time from "./time";
 import TimeConverter from "./time-converter";
+import TimelineEvents from "./events/TimelineEvents";
 
 export interface CanvasDimensions {
   width?: number;
@@ -10,8 +10,9 @@ export interface CanvasDimensions {
 }
 
 export default class Timeline {
-
   public offset: Time = new Time(0);
+
+  public xScale = 1;
 
   public canvas: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
@@ -24,10 +25,11 @@ export default class Timeline {
   public timeConverter: TimeConverter = new TimeConverter(this);
 
   public get secondSize() {
-    return 60;
+    return 60 * this.xScale;
   }
 
-  public time: Time = new Time();
+  public time: Time = new Time(2);
+  public hoveredTime: Time = new Time();
 
   public constructor({
     width = 900,
@@ -51,5 +53,13 @@ export default class Timeline {
   public draw() {
     this.drawer.draw();
     this.events.listen();
+  }
+
+  public on<K extends keyof HTMLElementEventMap>(
+    type: K,
+    listener: (this: HTMLCanvasElement, ev: HTMLElementEventMap[K]) => any,
+    options?: boolean | AddEventListenerOptions
+  ) {
+    this.canvas.addEventListener<K>(type, listener, options);
   }
 }

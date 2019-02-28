@@ -1,4 +1,4 @@
-export class Time {
+export default class Time {
   public constructor(public value: number = 2.2) {}  // TODO разложить на составляющие
 
   public static format(value: number) {

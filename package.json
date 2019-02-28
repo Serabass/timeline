@@ -16,6 +16,7 @@
     "webpack-serve": "^2.0.3"
   },
   "dependencies": {
+    "eventemitter": "^0.3.3",
     "reflect-metadata": "^0.1.13"
   }
 }
