@@ -1,4 +1,4 @@
-import Timeline from "./timeline";
+import Timeline from "./Timeline";
 
 export default class TimeConverter {
   public constructor(public timeline: Timeline) {}

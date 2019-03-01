@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import Timeline from "./timeline";
+import Timeline from "./Timeline";
 import Time from "./time";
 
 export interface TimelineOffset {

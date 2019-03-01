@@ -1,5 +1,5 @@
 import { ITimelineEventListener } from "./ITimelineEventListener";
-import Timeline from "../timeline";
+import Timeline from "../Timeline";
 
 export default abstract class TimelineEventListener
   implements ITimelineEventListener {

@@ -1,5 +1,5 @@
 import TimelineEventListener from "./TimelineEventListener";
-import Timeline from "../timeline";
+import Timeline from "../Timeline";
 import { DragListener } from "./DragListener";
 import { MousemoveListener } from "./MousemoveListener";
 import { TimeSetListener } from "./TimeSetListener";

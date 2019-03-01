@@ -1,5 +1,5 @@
 import TimelineEventListener from "./TimelineEventListener";
-import Timeline from "../timeline";
+import Timeline from "../Timeline";
 
 export class DragListener extends TimelineEventListener {
   public startX: number | null = null;
