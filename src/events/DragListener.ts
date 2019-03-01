@@ -1,5 +1,5 @@
 import TimelineEventListener from "./TimelineEventListener";
-import Timeline from "../Timeline";
+import Timeline from "../classes/Timeline";
 
 export class DragListener extends TimelineEventListener {
   public startX: number | null = null;
@@ -33,10 +33,9 @@ export class DragListener extends TimelineEventListener {
 
       switch (e.which) {
         case 1:
-          let offsetVal = e.offsetX - this.startX;
-          offsetVal = Math.max(this.timeline.constraints.min, offsetVal);
-          offsetVal = Math.min(this.timeline.constraints.max, offsetVal);
-          this.timeline.offset.value = this.timeline.timeConverter.coordsToSeconds(offsetVal);
+          this.timeline.offset.value = this.timeline.timeConverter.coordsToSeconds(
+            e.offsetX - this.startX
+          );
           break;
         case 2:
           const val = e.offsetX - this.startX;

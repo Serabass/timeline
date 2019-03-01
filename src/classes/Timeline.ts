@@ -1,4 +1,4 @@
-import Time from "./time";
+import Time from "./Time";
 import TimelineEvents from "./events/TimelineEvents";
 import Drawer from "./Drawer";
 import CanvasDimensions from "./CanvasDimensions";
@@ -18,6 +18,11 @@ export default class Timeline {
   public drawer: Drawer;
   public events: TimelineEvents;
   public timeConverter: TimeConverter = new TimeConverter(this);
+
+  public constraints: { min: number; max: number } = {
+    min: -900,
+    max: 0
+  };
 
   public get secondSize() {
     return 60 * this.xScale;

@@ -1,4 +1,4 @@
-import Timeline from "./Timeline";
+import Timeline from "./classes/Timeline";
 
 document.onreadystatechange = function() {
   let timeline = new Timeline({});

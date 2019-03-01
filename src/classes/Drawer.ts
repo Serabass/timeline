@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import Timeline from "./Timeline";
-import Time from "./time";
+import Time from "./Time";
 
 export interface TimelineOffset {
   x: number;
@@ -29,7 +29,7 @@ export default class Drawer {
     this.drawHeader();
     this.drawTime();
     this.drawCursor();
-    this.drawHoveredTime();
+    // this.drawHoveredTime();
     requestAnimationFrame(() => {
       this.draw();
     });
@@ -50,6 +50,14 @@ export default class Drawer {
     });
   }
 
+  public getTimeFromX(x: number) {
+    return x / this.timeline.secondSize;
+  }
+
+  public getXAtTime(time: number) {
+    return this.timeline.secondSize * time;
+  }
+
   public drawTime() {
     this.saveContext(ctx => {
       // this.path(ctx => {
@@ -60,13 +68,14 @@ export default class Drawer {
         this.timeline.offset.value
       );
 
-      for (let x = 0; x < this.timeline.width; x++) {
+      // ctx.translate(startX, 0);
+      for (let x = -200; x < this.timeline.width + 200; x++) {
         if (x % this.timeline.secondSize !== 0) {
           continue;
         }
 
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, 20);
+        ctx.moveTo((startX % this.timeline.secondSize) + x, 0);
+        ctx.lineTo((startX % this.timeline.secondSize) + x, 20);
         ctx.moveTo(0, 0);
 
         this.saveContext(ctx => {
@@ -75,7 +84,11 @@ export default class Drawer {
           let xx = this.timeline.timeConverter.secondsToCoords(
             this.timeline.offset.value
           );
-          ctx.fillText(Time.format(xx - x), x, 40);
+          ctx.fillText(
+            Time.format(this.getTimeFromX(x - startX)),
+            (startX % this.timeline.secondSize) + x,
+            40
+          );
         });
       }
 
