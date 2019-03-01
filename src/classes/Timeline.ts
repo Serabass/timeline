@@ -19,6 +19,10 @@ export default class Timeline {
   public events: TimelineEvents;
   public timeConverter: TimeConverter = new TimeConverter(this);
 
+  public time: Time = new Time(0);
+  public hoveredTime: Time = new Time();
+  public debug: HTMLPreElement;
+
   public constraints: { min: number; max: number } = {
     min: -Infinity,
     max: Infinity
@@ -27,11 +31,6 @@ export default class Timeline {
   public get secondSize() {
     return 60 * this.xScale;
   }
-
-  public time: Time = new Time(2);
-  public hoveredTime: Time = new Time();
-
-  public debug: HTMLPreElement;
 
   public constructor({
     width = 900,
@@ -52,6 +51,7 @@ export default class Timeline {
     this.events = new TimelineEvents(this);
 
     this.debug = document.createElement('pre');
+    this.debug.style.userSelect = 'none';
     document.body.appendChild(this.debug);
   }
 

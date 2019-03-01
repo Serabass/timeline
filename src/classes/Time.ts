@@ -1,5 +1,5 @@
 export default class Time {
-  public constructor(public value: number = 2.2) {}  // TODO разложить на составляющие
+  public constructor(public value: number = 0) {}  // TODO разложить на составляющие
 
   public static format(value: number) {
     let mm = Math.abs(Math.floor(value / 60));

@@ -33,7 +33,7 @@ export default class Drawer {
     requestAnimationFrame(() => {
       this.draw();
     });
-    const json = JSON.stringify(this.serialize(), null, 4);
+    const json = `_${JSON.stringify(this.serialize(), null, 4)}`;
     if (this.timeline.debug.innerHTML != json) {
       this.timeline.debug.innerHTML = json;
     }
@@ -147,10 +147,11 @@ export default class Drawer {
   }
 
   public serialize() {
-    return {
+    const obj: any = {
       time: this.timeline.time.toString(),
       offset: this.timeline.offset.toString(),
       hover: this.timeline.hoveredTime.toString()
     };
+    return Object.keys(obj).map(key => `${key} : ${obj[key]}`);
   }
 }
