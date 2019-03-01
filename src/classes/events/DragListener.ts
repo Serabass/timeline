@@ -39,7 +39,7 @@ export class DragListener extends TimelineEventListener {
           this.timeline.offset.value = this.timeline.timeConverter.coordsToSeconds(offsetVal);
           break;
         case 2:
-          const val = e.offsetX - this.startX;
+          const val = (e.offsetX - this.startX) / 30;
           this.timeline.xScale = Math.max(val, 0.1);
           break;
       }

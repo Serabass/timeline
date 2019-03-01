@@ -29,10 +29,14 @@ export default class Drawer {
     this.drawHeader();
     this.drawTime();
     this.drawCursor();
-    // this.drawHoveredTime();
+    this.drawHoveredTime();
     requestAnimationFrame(() => {
       this.draw();
     });
+    const json = JSON.stringify(this.serialize(), null, 4);
+    if (this.timeline.debug.innerHTML != json) {
+      this.timeline.debug.innerHTML = json;
+    }
   }
 
   public drawBg() {
@@ -45,7 +49,7 @@ export default class Drawer {
 
   public drawHeader() {
     this.saveContext(ctx => {
-      ctx.fillStyle = "green";
+      ctx.fillStyle = "#00C13F";
       ctx.fillRect(0, 0, this.timeline.width, 25);
     });
   }
@@ -100,7 +104,7 @@ export default class Drawer {
   public drawCursor() {
     this.saveContext(ctx => {
       this.path(ctx => {
-        ctx.strokeStyle = "blue";
+        ctx.strokeStyle = "#FF2E12";
         ctx.lineWidth = 1;
         let startX = this.timeline.timeConverter.secondsToCoords(
           this.timeline.offset.value
@@ -115,6 +119,7 @@ export default class Drawer {
           this.timeline.height
         );
         ctx.moveTo(0, 0);
+        ctx.stroke();
       });
     });
   }
@@ -139,5 +144,13 @@ export default class Drawer {
       ctx.moveTo(0, 0);
       // });
     });
+  }
+
+  public serialize() {
+    return {
+      time: this.timeline.time.toString(),
+      offset: this.timeline.offset.toString(),
+      hover: this.timeline.hoveredTime.toString()
+    };
   }
 }
