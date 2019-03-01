@@ -142,6 +142,7 @@ export default class Drawer {
         this.timeline.height
       );
       ctx.moveTo(0, 0);
+      ctx.stroke();
       // });
     });
   }

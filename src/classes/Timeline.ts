@@ -1,13 +1,13 @@
 import Time from "./Time";
 import TimelineEvents from "./events/TimelineEvents";
 import Drawer from "./Drawer";
-import CanvasDimensions from "./CanvasDimensions";
+import CanvasOptions from "./CanvasOptions";
 import TimeConverter from "./TimeConverter";
 
 export default class Timeline {
   public offset: Time = new Time(0);
 
-  public xScale = 1;
+  public xScale = 1.0;
 
   public canvas: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
@@ -36,7 +36,7 @@ export default class Timeline {
     width = 900,
     height = 200,
     canvas = document.createElement("canvas")
-  }: CanvasDimensions) {
+  }: CanvasOptions) {
     this.canvas = canvas;
 
     this.width = width;
@@ -66,5 +66,9 @@ export default class Timeline {
     options?: boolean | AddEventListenerOptions
   ) {
     this.canvas.addEventListener<K>(type, listener, options);
+  }
+
+  public append(dom = document.body) {
+    dom.appendChild(this.canvas);
   }
 }
